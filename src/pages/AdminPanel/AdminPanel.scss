@@ -1,0 +1,9 @@
+.admin{
+  display: block;
+
+
+  &__list{
+    display: flex;
+    gap: 20px;
+  }
+}

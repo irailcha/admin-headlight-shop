@@ -29,16 +29,21 @@ try {
 
 export const updateAdvert = createAsyncThunk(
   "adverts/updateAdvert",
-  async (advertData, { rejectWithValue }) => {
+  async ({ id, formData }, { rejectWithValue }) => {
     try {
-      const { _id, ...rest } = advertData;
       const response = await axios.put(
-        `https://backend-headlight-shop.vercel.app/api/adverts/${_id}`,
-        rest
+        `https://backend-headlight-shop.vercel.app/api/adverts/${id}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || error.message);
+      console.error("Помилка при оновленні оголошення:", error);
+      return rejectWithValue(error.response?.data || error.message);
     }
   }
 );

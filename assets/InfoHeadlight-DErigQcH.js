@@ -1,4 +1,4 @@
-import{c as R,b as F,r as j,j as f,u as q,d as z,a as Z,s as B,e as U}from"./index-CG5og3lb.js";import{L as Q}from"./Loader-Dttfv3q7.js";var H={};/*!
+import{c as R,b as F,r as j,j as f,u as q,d as z,a as Z,s as B,e as U}from"./index-Cb6NXkpC.js";import{L as Q}from"./Loader-5g0sJ1wd.js";var H={};/*!
 	By André Rinas, www.andrerinas.de
 	Documentation, www.simplelightbox.com
 	Available for use under the MIT License

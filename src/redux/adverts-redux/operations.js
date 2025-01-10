@@ -27,6 +27,21 @@ try {
 }
 });
 
+export const updateAdvert = createAsyncThunk(
+  "adverts/updateAdvert",
+  async (advertData, { rejectWithValue }) => {
+    try {
+      const { _id, ...rest } = advertData;
+      const response = await axios.put(
+        `https://backend-headlight-shop.vercel.app/api/adverts/${_id}`,
+        rest
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || error.message);
+    }
+  }
+);
 
 
 

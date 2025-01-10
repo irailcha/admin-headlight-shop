@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchAdverts, createAdvert, removeAdvert, getOneAdvert } from "./operations";
+import { fetchAdverts, createAdvert, removeAdvert, getOneAdvert, updateAdvert } from "./operations";
 
 
 const advertsSlice=createSlice({
@@ -57,6 +57,12 @@ const advertsSlice=createSlice({
         state.adverts = state.adverts.filter(advert => advert._id!== action.payload);
       }
     })
+    .addCase(updateAdvert.fulfilled, (state, action) => {
+      const index = state.items.findIndex((item) => item._id === action.payload._id);
+      if (index !== -1) {
+        state.items[index] = action.payload;
+      }
+    });
   
     
   }

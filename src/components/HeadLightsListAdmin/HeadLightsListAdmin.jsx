@@ -5,6 +5,7 @@ import { selectAdverts, selectLoading, selectError } from "../../redux/adverts-r
 import { fetchAdverts, removeAdvert } from "../../redux/adverts-redux/operations";
 import Loader from "../Loader/Loader";
 import "./HeadLightsListAdmin.scss";
+import ChangeAdForm from "../ChangeAdForm/ChangeAdForm";
 
 
 const HeadLightsListAdmin = ({query}) => {
@@ -17,10 +18,10 @@ const HeadLightsListAdmin = ({query}) => {
     dispatch(fetchAdverts());
   }, [dispatch]);
 
-  const handleRemove = (id) => {
-    dispatch(removeAdvert(id));
+  const handleRemove = async (id) => {
+    await dispatch(removeAdvert(id));
+    dispatch(fetchAdverts()); // Повторно завантажуємо список
   };
-
   
   
   if (isLoading) {
@@ -46,8 +47,11 @@ const HeadLightsListAdmin = ({query}) => {
           <p className="headlights__price block">{advert.price} грн </p>
           <Link className="headlights__button block" to={advert._id}>Детальніше</Link>
           <div className="headlights__buttons">
-          <button onClick={() => handleRemove(advert._id)}>Видалити</button>
-          <button >Змінити</button>
+          <button className="headlights__button" onClick={() => handleRemove(advert._id)}>Видалити</button>
+          <Link className="headlights__button" to={`/edit/${advert._id}`}>
+  Змінити
+</Link>
+
           </div>
         </li>
           ))}

@@ -1,0 +1,89 @@
+@use '../../styles/variables.scss' as *;
+@use '../../styles/mixins.scss' as *;
+
+.messages-container {
+  padding: 20px;
+  background-color: $grey-color;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: $black-color;
+  }
+
+  .message-item {
+    border: 1px solid $grey-color;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: $white-color; // Світлий фон за замовчуванням
+
+    &.unread {
+      border-left: 4px solid #495057; 
+      background-color: #343a40; // Темний фон для непрочитаних
+      color: $white-color; // Змінюємо колір тексту для кращої читабельності
+
+      p {
+        color: $white-color; // Змінюємо колір тексту для внутрішніх paragraph
+      }
+    }
+
+    .message-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+
+      p {
+        margin: 0;
+        font-size: 16px;
+        color: $black-color;
+
+        strong {
+          color:$black-color;
+        }
+      }
+    }
+
+    .message-meta {
+      margin-bottom: 10px;
+
+      p {
+        margin: 0;
+        font-size: 14px;
+        color:$black-color;
+
+        strong {
+          color: $black-color;
+        }
+      }
+    }
+
+    .message-toggle {
+      background-color: $black-color;
+      color: $white-color;
+      border: none;
+      border-radius: 4px;
+      padding: 8px 12px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+    }
+
+    .message-content {
+      margin-top: 10px;
+      padding: 10px;
+      background-color: $grey-color;
+      border-radius: 4px;
+      font-size: 14px;
+      color: $black-color;
+
+      strong {
+        color: $black-color;
+      }
+    }
+  }
+}

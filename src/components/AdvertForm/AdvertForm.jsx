@@ -58,10 +58,15 @@ const AdvertForm = () => {
       // Викликаємо action для додавання оголошення
       await dispatch(createAdvert(formData));
       alert('Оголошення додано!');
+
     } catch (error) {
       alert('Сталася помилка при додаванні оголошення');
     }
+
+    
   };
+
+
   const validateFiles = (files) => {
     if (!files.length) return 'Має бути хоча б одне фото';
     for (let file of files) {
@@ -99,47 +104,48 @@ const AdvertForm = () => {
       >
         {({ setFieldValue, setErrors }) => (
           <Form>
-            <div>
+             <h2 className="form-title">Створити оголошення</h2>
+            <div className='field-container'>
               <label htmlFor="compatibility">Сумісність</label>
               <Field name="compatibility" type="text" />
               <ErrorMessage name="compatibility" component="div" className="error-message" />
             </div>
-            <div>
+            <div className='field-container'>
               <label htmlFor="state">Стан</label>
               <Field name="state" type="text" />
               <ErrorMessage name="state" component="div" className="error-message" />
             </div>
-            <div>
+            <div className='field-container'>
               <label htmlFor="typeOfLamps">Тип ламп</label>
               <Field name="typeOfLamps" type="text" />
               <ErrorMessage name="typeOfLamps" component="div" className="error-message" />
             </div>
-            <div>
+            <div className='field-container'>
               <label htmlFor="isOriginal">Оригінальність</label>
               <Field type="checkbox" name="isOriginal" />
               <ErrorMessage name="isOriginal" component="div" className="error-message" />
             </div>
-            <div>
+            <div className='field-container'>
               <label htmlFor="partNumber">Номер деталі</label>
               <Field name="partNumber" type="text" />
               <ErrorMessage name="partNumber" component="div" className="error-message" />
             </div>
-            <div>
+            <div className='field-container'>
               <label htmlFor="material">Матеріал</label>
               <Field name="material" type="text" />
               <ErrorMessage name="material" component="div" className="error-message" />
             </div>
-            <div>
+            <div className='field-container'>
               <label htmlFor="typeOfGlass">Тип скла</label>
               <Field name="typeOfGlass" type="text" />
               <ErrorMessage name="typeOfGlass" component="div" className="error-message" />
             </div>
-            <div>
+            <div className='field-container'>
               <label htmlFor="price">Ціна</label>
               <Field name="price" type="number" />
               <ErrorMessage name="price" component="div" className="error-message" />
             </div>
-            <div>
+            <div className='field-container'>
               <label htmlFor="photo">Фото</label>
               <input
                 name="photo"
@@ -158,12 +164,12 @@ const AdvertForm = () => {
               />
               <ErrorMessage name="photo" component="div" className="error-message" />
             </div>
-            <div>
+            <div className='field-container'>
               <label htmlFor="videoUrl">Посилання на відео</label>
               <Field name="videoUrl" type="url" />
               <ErrorMessage name="videoUrl" component="div" className="error-message" />
             </div>
-            <div>
+            <div className='field-container'>
               <label htmlFor="description">Опис</label>
               <Field name="description" as="textarea" />
               <ErrorMessage name="description" component="div" className="error-message" />

@@ -1,18 +1,21 @@
 import { Outlet, NavLink } from 'react-router-dom';
 import { Suspense } from 'react';
 import './Layout.scss';
-import logo from '../../assets/images/logo.png';
-
 const Layout = () => {
   return (
     <div>
     <header className='header'>
-      <a className='logo'>
-        <img src={logo} alt='Logo' width={100}/>
-      </a>
-
-        <NavLink to="/admin"> Admin</NavLink>
-
+      <ul className='header__menu'>
+      <li>
+        <NavLink to="/headlightslist" end>Всі оголошення</NavLink>
+      </li>
+      <li>
+        <NavLink to="/addAdvert">Додати оголошення</NavLink>
+      </li>
+      <li>
+        <NavLink to="/messages">Повідомлення</NavLink>
+      </li>
+      </ul>
     </header>
       <main>
       <Suspense fallback={<p>Loading....</p>}>

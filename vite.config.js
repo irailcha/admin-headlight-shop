@@ -3,9 +3,5 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  base: '/admin-panel/',
-  define: {
-    global: {},
-  },
+  base: '/admin-headlight-shop/', 
 });
-

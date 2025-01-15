@@ -84,3 +84,18 @@ form button:hover {
   font-size: 24px;
   margin-bottom: 20px;
 }
+
+.field-container__photo-field{
+  max-width: 300px;
+  width: 100%;
+}
+
+.photo-field{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+@media (max-width: 578px){
+  flex-direction: column;
+}
+}

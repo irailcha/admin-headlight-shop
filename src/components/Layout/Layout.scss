@@ -1,19 +1,30 @@
 @use '../../styles/variables.scss' as *;
 
 .header{
-  padding: 0 60px;
+  padding: 0 30px;
   background-color: $black-color;
   display: flex;
   align-items: center;
   justify-content: space-between;
   
+  @media (min-width: 768px) {
+    padding: 0 60px;
+        }
   &__menu{
     display: flex;
-    gap: 20px; 
+    flex-direction: column;
+    gap: 10px; 
     justify-content: end;
+    align-items: center;
     color: $white-color;
     text-transform: uppercase;
     padding: 10px;
+
+
+    @media (min-width: 576px) {
+flex-direction: row;
+gap: 20px;
+    }
   }
   
   

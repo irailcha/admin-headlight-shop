@@ -1,19 +1,20 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { createAdvert } from '../../redux/adverts-redux/operations';
 import './AdvertForm.scss';
+import { IoMdClose } from "react-icons/io";
 
 
 const advertSchema = Yup.object().shape({
-  compatibility: Yup.string().required('Це поле обов\'язкове'),
+  mark: Yup.string().required('Це поле обов\'язкове'),
+  model: Yup.string().required('Це поле обов\'язкове'),
   state: Yup.string().required('Це поле обов\'язкове'),
   typeOfLamps: Yup.string().required('Це поле обов\'язкове'),
+  side: Yup.string().required('Це поле обов\'язкове'),
   isOriginal: Yup.boolean().required('Це поле обов\'язкове'),
   partNumber: Yup.string().required('Це поле обов\'язкове'),
-  material: Yup.string().required('Це поле обов\'язкове'),
-  typeOfGlass: Yup.string().required('Це поле обов\'язкове'),
   price: Yup.number().required('Це поле обов\'язкове').min(0, 'Ціна не може бути від\'ємною'),
   photo: Yup.array()
   .min(1, 'Має бути хоча б одне фото')
@@ -29,18 +30,18 @@ const advertSchema = Yup.object().shape({
 
 const AdvertForm = () => {
   const dispatch = useDispatch();
-
+const [currentPhotos, setCurrentPhotos] = useState([]); 
   const handleSubmit = async (values) => {
     const formData = new FormData();
     
     // Додаємо всі поля до FormData
-    formData.append('compatibility', values.compatibility);
+    formData.append('mark', values.mark);
+    formData.append('model', values.model);
     formData.append('state', values.state);
     formData.append('typeOfLamps', values.typeOfLamps);
     formData.append('isOriginal', values.isOriginal);
+    formData.append('side', values.side);
     formData.append('partNumber', values.partNumber);
-    formData.append('material', values.material);
-    formData.append('typeOfGlass', values.typeOfGlass);
     formData.append('price', values.price);
     formData.append('description', values.description);
 
@@ -67,6 +68,11 @@ const AdvertForm = () => {
   };
 
 
+  const removePhoto = (index) => {
+    setCurrentPhotos((prev) => prev.filter((_, i) => i !== index));
+  };
+
+
   const validateFiles = (files) => {
     if (!files.length) return 'Має бути хоча б одне фото';
     for (let file of files) {
@@ -87,13 +93,13 @@ const AdvertForm = () => {
     <section className="form-container">
       <Formik
         initialValues={{
-          compatibility: '',
+          mark: '',
+          model: '',
           state: '',
           typeOfLamps: '',
+          side: '',
           isOriginal: false,
           partNumber: '',
-          material: '',
-          typeOfGlass: '',
           price: 0,
           photo: [],
           videoUrl: '',
@@ -106,19 +112,36 @@ const AdvertForm = () => {
           <Form>
              <h2 className="form-title">Створити оголошення</h2>
             <div className='field-container'>
-              <label htmlFor="compatibility">Сумісність</label>
-              <Field name="compatibility" type="text" />
-              <ErrorMessage name="compatibility" component="div" className="error-message" />
+              <label htmlFor="mark">Марка</label>
+              <Field name="mark" type="text" />
+              <ErrorMessage name="mark" component="div" className="error-message" />
+            </div>
+            <div className='field-container'>
+              <label htmlFor="model">Модель</label>
+              <Field name="model" type="text" />
+              <ErrorMessage name="model" component="div" className="error-message" />
             </div>
             <div className='field-container'>
               <label htmlFor="state">Стан</label>
-              <Field name="state" type="text" />
+              <Field as="select" name="state">
+             <option value="нове">Нова</option>
+             <option value="вживане">Вживана</option>
+           </Field>
               <ErrorMessage name="state" component="div" className="error-message" />
             </div>
             <div className='field-container'>
               <label htmlFor="typeOfLamps">Тип ламп</label>
               <Field name="typeOfLamps" type="text" />
               <ErrorMessage name="typeOfLamps" component="div" className="error-message" />
+            </div>
+            <div className='field-container'>
+              <label htmlFor="side">Сторона</label>
+              <Field as="select" name="side">
+             <option value="ліва">Ліва</option>
+             <option value="права">Права</option>
+             <option value="комплект">Комплект</option>
+           </Field>
+              <ErrorMessage name="side" component="div" className="error-message" />
             </div>
             <div className='field-container'>
               <label htmlFor="isOriginal">Оригінальність</label>
@@ -131,37 +154,48 @@ const AdvertForm = () => {
               <ErrorMessage name="partNumber" component="div" className="error-message" />
             </div>
             <div className='field-container'>
-              <label htmlFor="material">Матеріал</label>
-              <Field name="material" type="text" />
-              <ErrorMessage name="material" component="div" className="error-message" />
-            </div>
-            <div className='field-container'>
-              <label htmlFor="typeOfGlass">Тип скла</label>
-              <Field name="typeOfGlass" type="text" />
-              <ErrorMessage name="typeOfGlass" component="div" className="error-message" />
-            </div>
-            <div className='field-container'>
               <label htmlFor="price">Ціна</label>
               <Field name="price" type="number" />
               <ErrorMessage name="price" component="div" className="error-message" />
             </div>
             <div className='field-container'>
               <label htmlFor="photo">Фото</label>
+              <div className="photo-field">
               <input
+              className="field-container__photo-field"
                 name="photo"
                 type="file"
                 multiple
                 onChange={(event) => {
                   const files = Array.from(event.currentTarget.files);
                   const error = validateFiles(files);
+                  const previews = files.map((file) => URL.createObjectURL(file));
                   if (error) {
                     setFieldValue('photo', []);
                     setErrors({ photo: error });
                   } else {
                     setFieldValue('photo', files);
+                    setCurrentPhotos((prev)=> [...prev, ...previews])
+
                   }
                 }}
               />
+              
+               <div className="photo-preview-container">
+                {currentPhotos.map((photo, index) => (
+                    <div key={index} className="photo-item">
+                      <img src={photo} alt={`Фото ${index + 1}`} className="photo-preview" />
+                      <button
+                        type="button"
+                        onClick={() => removePhoto(index)}
+                        className="remove-photo-button"
+                      >
+                        <IoMdClose />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+                </div>
               <ErrorMessage name="photo" component="div" className="error-message" />
             </div>
             <div className='field-container'>

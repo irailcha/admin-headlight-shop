@@ -58,10 +58,18 @@ const advertsSlice=createSlice({
       }
     })
     .addCase(updateAdvert.fulfilled, (state, action) => {
-      const index = state.items.findIndex((item) => item._id === action.payload._id);
-      if (index !== -1) {
-        state.items[index] = action.payload;
+      if (!Array.isArray(state.adverts)) {
+        console.error("state.adverts не является массивом:", state.adverts);
+        return;
       }
+    
+      const index = state.adverts.findIndex((item) => item._id === action.payload._id);
+      if (index !== -1) {
+        state.adverts[index] = action.payload;
+      }
+    })
+    .addCase(updateAdvert.rejected, (state, action) => {
+      state.error = action.error.message;
     });
   
     

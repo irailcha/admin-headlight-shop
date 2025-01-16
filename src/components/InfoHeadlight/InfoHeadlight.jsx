@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useNavigate, useParams, Link } from 'react-router-dom';
+import { useNavigate, useParams} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getOneAdvert } from '../../redux/adverts-redux/operations';
 import { selectAdvert } from '../../redux/adverts-redux/selectors';
@@ -64,7 +64,7 @@ const InfoHeadlight = () => {
           <p><strong className='info__second-section-title'>Стан:</strong> {state}</p>
           <p><strong className='info__second-section-title'>Тип лампи:</strong> {typeOfLamps}</p>
           <p><strong className='info__second-section-title'>Сторона:</strong> {side}</p>
-          <p><strong className='info__second-section-title'>Оригінал:</strong> {isOriginal}</p>
+          <p><strong className='info__second-section-title'>Оригінал:</strong> {isOriginal ? "Так" : "Ні"}</p>
           <p>
             <strong className="info__second-section-title">Посилання на відеоогляд:</strong>
             {videoUrl ? (
@@ -74,7 +74,6 @@ const InfoHeadlight = () => {
             )}
           </p>
           <p>{description}</p>
-          <Link to={`/edit/${advertId}`}>змінити</Link>
         </div>
       </div>
     </section>

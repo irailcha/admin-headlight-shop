@@ -71,6 +71,8 @@ const ChangeAdForm = () => {
     }
   
     const formData = new FormData();
+  
+    // Добавляем основные данные
     formData.append("mark", values.mark);
     formData.append("model", values.model);
     formData.append("state", values.state);
@@ -81,26 +83,31 @@ const ChangeAdForm = () => {
     formData.append("price", values.price);
     formData.append("description", values.description);
   
+    // Добавляем текущие фотографии
+    currentPhotos.forEach((photo) => {
+      if (typeof photo === "string") {
+        formData.append("currentPhotos[]", photo); // Используем массив для текущих фотографий
+      }
+    });
+  
     // Добавляем новые фотографии
-    if (values.photo) {
+    if (values.photo && values.photo.length > 0) {
       values.photo.forEach((file) => {
         formData.append("photo", file);
       });
     }
   
-    // Добавляем текущие фотографии
-    currentPhotos.forEach((photo) => {
-      if (typeof photo === "string") {
-        formData.append("currentPhotos", photo);
-      }
-    });
-  
-  
-    await dispatch(updateAdvert({ id, formData }));
-    setShowSuccess(true);
-    setTimeout(() => setShowSuccess(false), 3000);
-    navigate("/headlightslist");
+    try {
+      const response = await dispatch(updateAdvert({ id, formData }));
+      console.log("Ответ сервера:", response);
+      setShowSuccess(true);
+      setTimeout(() => setShowSuccess(false), 3000);
+      navigate("/headlightslist");
+    } catch (error) {
+      console.error("Ошибка при обновлении объявления:", error);
+    }
   };
+  
   
   
 
@@ -198,8 +205,9 @@ const ChangeAdForm = () => {
       setCurrentPhotos((prev) => [...prev, ...previews]); 
     }}
   />
-  <div className="photo-preview-container">
- <ul> {currentPhotos.map((photo, index) => (
+<div className="photo-preview-container">
+  <ul>
+    {currentPhotos.map((photo, index) => (
       <li key={index} className="photo-item">
         <img src={photo} alt={`Фото ${index + 1}`} className="photo-preview" />
         <button
@@ -210,8 +218,9 @@ const ChangeAdForm = () => {
           <IoMdClose />
         </button>
       </li>
-    ))}</ul>
-  </div>
+    ))}
+  </ul>
+</div>
   </div>
   <ErrorMessage name="photo" component="div" className="error-message" />
 

@@ -124,8 +124,8 @@ const [currentPhotos, setCurrentPhotos] = useState([]);
             <div className='field-container'>
               <label htmlFor="state">Стан</label>
               <Field as="select" name="state">
-             <option value="нове">Нова</option>
-             <option value="вживане">Вживана</option>
+             <option value="Нова">Нова</option>
+             <option value="Вживана">Вживана</option>
            </Field>
               <ErrorMessage name="state" component="div" className="error-message" />
             </div>
@@ -137,9 +137,9 @@ const [currentPhotos, setCurrentPhotos] = useState([]);
             <div className='field-container'>
               <label htmlFor="side">Сторона</label>
               <Field as="select" name="side">
-             <option value="ліва">Ліва</option>
-             <option value="права">Права</option>
-             <option value="комплект">Комплект</option>
+             <option value="Ліва">Ліва</option>
+             <option value="Права">Права</option>
+             <option value="Комплект">Комплект</option>
            </Field>
               <ErrorMessage name="side" component="div" className="error-message" />
             </div>

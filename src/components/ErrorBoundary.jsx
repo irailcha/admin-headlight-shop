@@ -18,10 +18,10 @@ class ErrorBoundary extends React.Component {
     if (this.state.hasError) {
       return (
         <div>
-          <h1>Щось пішло не так</h1>
+          <h1>Ой, щось пішло не так</h1>
           <p>{this.state.error?.message}</p>
           <pre>{this.state.errorInfo?.componentStack}</pre>
-          <button onClick={() => window.location.reload()}>Перезавантажити сторінку</button>
+          <button onClick={() => window.location.reload()}>Перезавантажити</button>
         </div>
       );
     }

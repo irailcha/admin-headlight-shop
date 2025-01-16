@@ -32,10 +32,18 @@
 }
 
 &__img-thumb{
-  max-width: 300px;
+  width:200px;
   height: 200px;
   border-radius: 8px;
   background-color: $background-color;
+
+
+  @media (min-width: 576px){
+    width: 300px;
+  }
+  
+ 
+
 }
 
 &__img{

@@ -50,12 +50,10 @@ const HeadLightsListAdmin = () => {
           <p className="headlights__compatibility block">{advert.mark}{" "}{advert.model}</p>
           <p className="headlights__partNumber block"><strong>Номер деталі:</strong> {advert.partNumber}</p>
           <p className="headlights__price block">{advert.price} грн </p>
-          <Link className="headlights__button block" to={advert._id}>Детальніше</Link>
           <div className="headlights__buttons">
+          <Link className="headlights__button block" to={advert._id}>Детальніше</Link>
           <button className="headlights__button" onClick={() => handleRemove(advert._id)}>Видалити</button>
-          <Link className="headlights__button" to={`/edit/${advert._id}`}>
-  Змінити
-</Link>
+          <Link className="headlights__button" to={`/edit/${advert._id}`}>Змінити</Link>
 
           </div>
         </li>

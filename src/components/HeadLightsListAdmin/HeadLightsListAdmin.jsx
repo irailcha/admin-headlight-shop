@@ -47,8 +47,8 @@ const HeadLightsListAdmin = () => {
             <img className="headlights__img" 
             src={advert.photo[0]} alt={`photo of ${advert.mark}`} loading="lazy" width={250} />
           </div>
-          <p className="headlights__compatibility block">{advert.mark}{" "}{advert.model}</p>
-          <p className="headlights__partNumber block"><strong>Номер деталі:</strong> {advert.partNumber}</p>
+          <p className="headlights__compatibility block">{advert.mark}<br/>{advert.model}<br/>{advert.year}</p>
+          <p className="headlights__partNumber block"><strong>Номер деталі:</strong><br/> {advert.partNumber}</p>
           <p className="headlights__price block">{advert.price} грн </p>
           <div className="headlights__buttons">
           <Link className="headlights__button block" to={advert._id}>Детальніше</Link>

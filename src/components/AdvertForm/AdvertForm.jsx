@@ -10,6 +10,7 @@ import { IoMdClose } from "react-icons/io";
 const advertSchema = Yup.object().shape({
   mark: Yup.string().required('Це поле обов\'язкове'),
   model: Yup.string().required('Це поле обов\'язкове'),
+  year: Yup.string().required('Це поле обов\'язкове'),
   state: Yup.string().required('Це поле обов\'язкове'),
   typeOfLamps: Yup.string().required('Це поле обов\'язкове'),
   side: Yup.string().required('Це поле обов\'язкове'),
@@ -37,6 +38,7 @@ const [currentPhotos, setCurrentPhotos] = useState([]);
     // Додаємо всі поля до FormData
     formData.append('mark', values.mark);
     formData.append('model', values.model);
+    formData.append('year', values.year);
     formData.append('state', values.state);
     formData.append('typeOfLamps', values.typeOfLamps);
     formData.append('isOriginal', values.isOriginal);
@@ -95,6 +97,7 @@ const [currentPhotos, setCurrentPhotos] = useState([]);
         initialValues={{
           mark: '',
           model: '',
+          year:'',
           state: '',
           typeOfLamps: '',
           side: '',
@@ -120,6 +123,11 @@ const [currentPhotos, setCurrentPhotos] = useState([]);
               <label htmlFor="model">Модель</label>
               <Field name="model" type="text" />
               <ErrorMessage name="model" component="div" className="error-message" />
+            </div>
+            <div className='field-container'>
+              <label htmlFor="year">Рік</label>
+              <Field name="year" type="text" />
+              <ErrorMessage name="year" component="div" className="error-message" />
             </div>
             <div className='field-container'>
               <label htmlFor="state">Стан</label>

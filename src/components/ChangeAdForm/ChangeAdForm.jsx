@@ -14,6 +14,7 @@ import { RiSendPlaneFill } from "react-icons/ri";
 const advertSchema = Yup.object().shape({
   mark: Yup.string().required('Це поле обов\'язкове'),
   model: Yup.string().required('Це поле обов\'язкове'),
+  year: Yup.string().required('Це поле обов\'язкове'),
   state: Yup.string().required('Це поле обов\'язкове'),
   typeOfLamps: Yup.string().required('Це поле обов\'язкове'),
   side: Yup.string().required('Це поле обов\'язкове'),
@@ -49,6 +50,7 @@ const ChangeAdForm = () => {
         setInitialValues({
           mark: advert.mark,
           model: advert.model,
+          year: advert.year,
           state: advert.state,
           typeOfLamps: advert.typeOfLamps,
           side: advert.side,
@@ -75,6 +77,7 @@ const ChangeAdForm = () => {
     // Добавляем основные данные
     formData.append("mark", values.mark);
     formData.append("model", values.model);
+    formData.append("year", values.year);
     formData.append("state", values.state);
     formData.append("typeOfLamps", values.typeOfLamps);
     formData.append("side", values.side);
@@ -112,7 +115,6 @@ const ChangeAdForm = () => {
   
 
   const removePhoto = (index) => {
-
     setCurrentPhotos((prev) => prev.filter((_, i) => i !== index));
   };
 
@@ -151,6 +153,11 @@ const ChangeAdForm = () => {
             <label htmlFor="model">Модель:</label>
             <Field type="text" name="model" />
             <ErrorMessage name="model" component="div" className="error-message" />
+          </div>
+          <div className="field-container">
+            <label htmlFor="year">Рік:</label>
+            <Field type="text" name="year" />
+            <ErrorMessage name="year" component="div" className="error-message" />
           </div>
            <div className='field-container'>
               <label htmlFor="state">Стан</label>
